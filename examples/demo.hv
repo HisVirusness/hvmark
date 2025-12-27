@@ -1,0 +1,25 @@
+<h1>hVmark Demo</h1>
+
+I can write *in bold* and %in italics%.
+I can -strike things out- and _underline_ them.
+
+Line breaks are automatic, []except for when they're not.
+
+*// Links Demo*
+@@https://0uts1de.hisvirusness.com/^Join my webring^ if you haven't already.
+Or check out my @@/now^^ page.
+
+*// Image Demo[size defaults to 85%]*
+@@img:https://hisvirusness.com/works/2d-hisvirusness.png[50%]^This is a caption. []And this is %with emphasis.%^
+
+*// YouTube Demo*
+@@ytb:ftyf3tr_qAk^%"I was an emo kid in high school... []The emotion I chose was *HAPPINESS.*"% []- Aaron Kozbial^
+
+*// Lists Demo*
+[+] First thing
+[+] Second thing []with a soft break
+[+] Third thing
+
+[-] Plain one
+[-] Plain two %with emphasis%
+[-] Plain three []and another soft break

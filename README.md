@@ -4,7 +4,8 @@
 
 This is the **vanilla reference model**; a working example showing how the language behaves in practice. My own site-specific settings were nixed out of the code to keep it CSS agnostic. Despite that, output HTML still contains [deprecated code](https://hisvirusness.com/man-page#deprecation-policy) and assumes a trusted author pipeline.
 
-This module exists to _demonstrate, not aberrate_. If you want to make syntax changes or add features, **FFTF**: **F**eel **F**ree **T**o **F**ork.
+This module exists to _demonstrate, not aberrate_. If you want to make syntax changes or add features,  
+**FFTF**: **F**eel **F**ree **T**o **F**ork.
 
 ## Syntax
 

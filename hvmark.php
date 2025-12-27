@@ -135,8 +135,8 @@ function hvmark(string $line): string {
                           'title="YouTube video player" loading="lazy" ' .
                           'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' .
                           'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
-                $full = '<figure class="yt-container" style="text-align:center">' . $iframe . '<center><figcaption>' . $cap . '</figcaption></center></figure>';
-                $none = '<div class="yt-container" style="text-align:center">' . $iframe . '</div>';
+                $full = '<figure class="yt-container" style="text-align:center;">' . $iframe . '<center><figcaption>' . $cap . '</figcaption></center></figure>';
+                $none = '<div class="yt-container" style="text-align:center;">' . $iframe . '</div>';
                 if (!$cap) { $yt_out = $none; } else { $yt_out = $full; }
                 return $yt_out;
             }

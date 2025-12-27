@@ -22,7 +22,7 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 
 *   **Soft line break**: `[]` → `<br>`
 *   **Subheading**: `*// Subheading Text*`
-*   **Subheading output**: `<h# id="subheading-text">// Subheading Text</h#>`
+*   **Subheading output**: `<h# id="subheading-text">// Subheading Text</h#>`  
     Actual heading is based on config.
 *   **Optional TOC**: If two or more subheaders are found, a table of contents will be generated. The TOC is automatically placed under the main heading (_&lt;h1>_) of the page, at the top of the page if a main heading isn't present, or at the location of `<!--HV_TOC-->`.
 
@@ -30,9 +30,9 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 
 All use the same “anchor + fangs” pattern: `@@anchor^fangs^`
 
-*   **Links**: `@@https://example.com/^Link text^`
+*   **Links**: `@@https://example.com/^Link text^`  
     (leave fangs empty to use the URL as text, e.g. `@@https://example.com/^^`)
-*   **Images**: `@@img:/path/file.jpg^Caption^` (85% width by default; caption optional)
+*   **Images**: `@@img:/path/file.jpg^Caption^` (85% width by default; caption optional)  
     Full: `@@img:/path/file.jpg\[50px|25% left|right|center|blank\]^Caption^`
 *   **YouTube**: `@@ytb:VIDEOID^Caption^` (caption optional)
 
@@ -46,7 +46,7 @@ All use the same “anchor + fangs” pattern: `@@anchor^fangs^`
 
 *   **_Order matters_ when nesting**: `*` and `%` are forgiving, but consistent nesting is recommended.
 *   Inline raw HTML on a line disables hVmark parsing on that line.
-*   A backslash (\\) will escape an inline marker and output the literal symbol.
+*   A backslash (\\) will escape an inline marker and output the literal symbol.  
     (e.g., `\%` will output `%`.)
 *   Despite the above, the symbols used for inline markers do not appear in the alt text of images, escaped or not.
 *   Emojis are supported in regular text, but not in subheadings.

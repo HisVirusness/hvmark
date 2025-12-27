@@ -55,6 +55,5 @@ All use the same “anchor + fangs” pattern: `@@anchor^fangs^`
 
 ## Further Reading
 
-*  [Root Doc & Demo](https://hisvirusness.com/hvmark)
 *  [hVmark in Production](https://hisvirusness.com/man-page#hvmark)
 *  [Writing About hVmark… in hVmark](https://hisvirusness.com/can-and-should-are-not-the-same)

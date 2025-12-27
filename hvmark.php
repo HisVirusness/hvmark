@@ -119,10 +119,10 @@ function hvmark(string $line): string {
 
                 if ($align === 'left' || $align === 'right') {
                     $ta = $align === 'left' ? 'left' : 'right';
-                    return '<figure style="text-align:' . $ta . '; margin:0;">' . $imgHtml . $capHtml . '</figure>';
+                    return '<figure style="text-align:' . $ta . ';">' . $imgHtml . $capHtml . '</figure>';
                 }
 
-                return '<figure style="text-align:center; margin:0;">' . $imgHtml . $capHtml . '</figure>';
+                return '<figure style="text-align:center;">' . $imgHtml . $capHtml . '</figure>';
             }
 
             // YOUTUBE: @@ytb:VIDEOID^Caption^

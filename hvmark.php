@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.4.1 - Vanilla
+// v1.5.0 - Vanilla
 // (c) 2025 HisVirusness
 
 // Typical Application:
@@ -54,7 +54,7 @@ function hvmark(string $line): string {
             $txt = trim($m[2]);
 
             // IMAGE: @@img:/path.jpg[opts]^Caption^
-            // opts: "[{width}{%|px}? {left|right|center|blank}?]" (order-insensitive, both optional)
+            // attrib: "[{width}{%|px}? {left|right|center|blank}?]" (order-insensitive, both optional)
             if (stripos($url, 'img:') === 0) {
                 $raw = trim(substr($url, 4));
                 $src = $raw;
@@ -188,6 +188,13 @@ function hvmark(string $line): string {
 
             return $sh_prefix.'<h'.$hv_subhead.' id="'.$slug.'"><span aria-hidden="true">// </span>'.$safe.'</h'.$hv_subhead.'>';
         },
+        $trim
+    );
+
+    // Horizontal Rule: --- || *** || ___ → <hr> (or whatever you have $hv_break set at)
+    $trim = preg_replace(
+        '/^\s*(?:-{3,}|\*{3,}|_{3,})\s*$/',
+        $GLOBALS['hv_break'],
         $trim
     );
 

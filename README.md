@@ -21,10 +21,14 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 #### Misc.
 
 *   **Soft line break**: `[]` → `<br>`
+*   **Horizontal rule**: --- → `<hr>`  
+    **Three or more** -, *, or _ characters on their own line will output a horizontal rule.  
+    Output styling depends on configuration.
 *   **Subheading**: `*// Subheading Text*`
 *   **Subheading output**: `<h# id="subheading-text">// Subheading Text</h#>`  
-    Actual heading is based on config.
-*   **Optional TOC**: If two or more subheaders are found, a table of contents will be generated. The TOC is automatically placed under the main heading (_&lt;h1>_) of the page, at the top of the page if a main heading isn't present, or at the location of `<!--HV_TOC-->`.
+    Actual heading level is based on config.
+*   **Optional TOC**: If two or more subheadings are found, a table of contents will be generated.  
+    The TOC is automatically placed under the main heading (_&lt;h1>_) of the page, at the top of the page if a main heading isn't present, or at the location of `<!--HV_TOC-->`.
 
 ### Links, Images, YouTube
 

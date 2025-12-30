@@ -54,7 +54,7 @@ function hvmark(string $line): string {
             $txt = trim($m[2]);
 
             // IMAGE: @@img:/path.jpg[opts]^Caption^
-            // attrib: "[{width}{%|px}? {left|right|center|blank}?]" (order-insensitive, both optional)
+            // opts: "[{width}{%|px}? {left|right|center|blank}?]" (order-insensitive, both optional)
             if (stripos($url, 'img:') === 0) {
                 $raw = trim(substr($url, 4));
                 $src = $raw;

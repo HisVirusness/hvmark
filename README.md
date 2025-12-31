@@ -1,5 +1,12 @@
 # hVmark
 
+![GitHub Release (Latest)](https://img.shields.io/github/v/release/HisVirusness/hvmark)
+![License](https://img.shields.io/github/license/HisVirusness/hvmark)
+![GitHub language](https://img.shields.io/github/languages/top/HisVirusness/hvmark)
+![GitHub Issues](https://img.shields.io/github/issues/HisVirusness/hvmark)  
+![Deprecated HTML](https://img.shields.io/badge/Outputs-Deprecated%20HTML-orange)
+![Non-Compliant](https://img.shields.io/badge/Proudly-Non--Compliant-critical)
+
 **hVmark** is a tiny, opinionated markup language made by and for, well, me. While it's used across HisVirusness.com, it's primarily used in posts in lieu of hard-coded HTML.
 
 This is the **vanilla reference model**; a working example showing how the language behaves in practice. My own site-specific settings were nixed out of the code to keep it CSS agnostic. Despite that, output HTML still contains [deprecated code](https://hisvirusness.com/man-page#deprecation-policy) and assumes a trusted author pipeline.

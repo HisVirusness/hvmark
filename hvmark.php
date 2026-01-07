@@ -36,13 +36,26 @@ function hvmark(string $line): string {
     $trim = trim($line);
     if ($trim === '') return '';
 
+    // Inline Code: `code` [setup]
+    $hv_code_store = [];
+    $trim = preg_replace_callback(
+        '/`([^`]+)`/u',
+        function ($m) use (&$hv_code_store) {
+            $code = htmlspecialchars($m[1], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+            $key  = '__HVCODE' . count($hv_code_store) . '__';
+            $hv_code_store[$key] = '<code>' . $code . '</code>';
+            return $key;
+        },
+        $trim
+    );
+    
     if (preg_match('/<[^>]+>/', $trim)) {
         return $trim;
     }
 
     $trim = str_replace(
-        ['\*','\%','\_','\-','\+','\@','\^','\[]','\<','\>'],
-        ['&#42;','&#37;','&#95;','&#45;', '&#43;','&#64;','&#94;','&#91;&#93;','&lt;','&gt;'],
+        ['\*','\%','\_','\-','\+','\@','\^','\[]','\<','\>','\`'],
+        ['&#42;','&#37;','&#95;','&#45;', '&#43;','&#64;','&#94;','&#91;&#93;','&lt;','&gt;','&grave;'],
         $trim
     );
 
@@ -222,6 +235,10 @@ function hvmark(string $line): string {
         '<u>$1</u>',
         $trim
     );
+    // Inline Code: `code`
+    if (!empty($hv_code_store)) {
+        $trim = strtr($trim, $hv_code_store);
+    }
     return $trim;
 }
 

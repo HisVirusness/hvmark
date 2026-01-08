@@ -50,6 +50,9 @@ function hvmark(string $line): string {
     );
     
     if (preg_match('/<[^>]+>/', $trim)) {
+        if (!empty($hv_code_store)) {
+            $trim = strtr($trim, $hv_code_store);
+        }
         return $trim;
     }
 

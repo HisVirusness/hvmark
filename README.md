@@ -18,12 +18,18 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 
 ### Inline Markers
 
+#### Block Formatting
+
+*   **Center Text**: `&text&`  
+    Wrap line in `<center>` tag.
+
 #### Text Formatting
 
 *   **Bold**: `*text*`
 *   _Emphasis_ (Italics): `%text%`
 *   <s>Strike</s>: `-text-`
 *   <ins>Underline</ins>: `_text_`
+*   `Code`: &grave;code&grave;
 
 #### Misc.
 

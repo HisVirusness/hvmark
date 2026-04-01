@@ -216,7 +216,7 @@ function hvmark(string $line): string {
 
     // Center: &text&
     $trim = preg_replace(
-        '/<[^>]*>(*SKIP)(*F)|(?<!\w)&([^&]+)&(?!\w)/u',
+        '/<[^>]*>(*SKIP)(*F)|(?<!\w)&(?!#?\w+;)([^&]+)&(?!\w)/u',
         '<center>$1</center>',
         $trim
     );

@@ -1,7 +1,7 @@
 <?php
 // hVmark Reference Model
 // v1.6.0 - Vanilla
-// (c) 2025 HisVirusness
+// (c) 2026 HisVirusness
 
 // Typical Application:
 //      Include this file in your PHP headers wherever

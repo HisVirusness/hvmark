@@ -29,7 +29,7 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 *   _Emphasis_ (Italics): `%text%`
 *   <s>Strike</s>: `-text-`
 *   <ins>Underline</ins>: `_text_`
-*   `Code`: &grave;code&grave;
+*   `Code`: `` `code` ``
 
 #### Misc.
 

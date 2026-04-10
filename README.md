@@ -45,7 +45,7 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 
 ### Links, Images, YouTube
 
-All use the same “anchor + fangs” pattern: `@@anchor^fangs^`
+All use the same **“anchor + fangs”** pattern: `@@anchor^fangs^`
 
 *   **Links**: `@@https://example.com/^Link text^`  
     (leave fangs empty to use the URL as text, e.g. `@@https://example.com/^^`)
@@ -63,8 +63,8 @@ All use the same “anchor + fangs” pattern: `@@anchor^fangs^`
 
 *   **_Order matters_ when nesting**: `*` and `%` are forgiving, but consistent nesting is recommended.
 *   Inline raw HTML on a line disables hVmark parsing on that line.
-*   A backslash (\\) will escape an inline marker and output the literal symbol.  
-    (e.g., `\%` will output `%`.)
+*   A backslash will escape an inline marker and output the literal symbol.  
+    (e.g., `\%` will output %.)
 *   Despite the above, the symbols used for inline markers do not appear in the alt text of images, escaped or not.
 *   Emojis are supported in regular text, but not in subheadings.
 *   Subheadings with similar names will have duplicate IDs; the TOC generator does not add incrementing suffixes.

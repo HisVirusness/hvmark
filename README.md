@@ -26,7 +26,8 @@ This module exists to _demonstrate, not aberrate_. If you want to make syntax ch
 #### Text Formatting
 
 *   **Bold**: `*text*`
-*   _Emphasis_ (Italics): `%text%`
+*   _Emphasis_ (Italics): `/text/`  
+Alternate: `%text%`
 *   <s>Strike</s>: `-text-`
 *   <ins>Underline</ins>: `_text_`
 *   `Code`: `` `code` ``

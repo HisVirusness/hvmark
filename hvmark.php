@@ -228,9 +228,14 @@ function hvmark(string $line): string {
         '<strong>$1</strong>',
         $trim
     );
-    // Italic: %text%
-    $trim = preg_replace(
+    // Italic: /text/
+    $italic_patterns = [
+        '/<[^>]*>(*SKIP)(*F)|(?<!\w)\/([^\/]+)\/(?!\w)/u',
+        // %text%: Deprecated, left in for backwards compatibility.
         '/<[^>]*>(*SKIP)(*F)|(?<!\w)%([^%]+)%(?!\w)/u',
+    ];
+    $trim = preg_replace(
+        $italic_patterns,
         '<em>$1</em>',
         $trim
     );

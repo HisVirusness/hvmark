@@ -304,7 +304,7 @@ function hvmark_web(array $lines): string {
         if ($clean === '') { $i++; continue; }
 
         if (preg_match(
-            '/^\s*<(?:center|div|ul|ol|hr|blockquote|iframe|table|pre|h[1-6]|figure|p|nav|!--)\b/i',
+            '/^\s*<(?:center|div|ul|ol|hr|blockquote|iframe|table|pre|h[1-6]|figure|p|nav|!--|\/)\b/i',
             $clean
         ) ||
         preg_match('/^\s*<img\b[^>]*>\s*$/i', $clean)

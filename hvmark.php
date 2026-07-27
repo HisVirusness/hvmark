@@ -108,9 +108,7 @@ function hvmark(string $line): string {
                 }
 
                 $cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8');
-                $sym = ['*','%','-','_','[',']'];
-                $alt = $cap !== '' ? str_replace($sym, '', $cap)
-                : basename($src);
+				$alt = htmlspecialchars(strip_tags(hvmark($txt)), ENT_QUOTES, 'UTF-8');
 
                 $srcAttr = htmlspecialchars($src, ENT_QUOTES, 'UTF-8');
 
@@ -157,6 +155,30 @@ function hvmark(string $line): string {
                 if (!$cap) { $yt_out = $none; } else { $yt_out = $full; }
                 return $yt_out;
             }
+			
+			// QUOTE: @@quo:First paragraph. {}Second paragraph.^Attribution^
+			// hVmark text formatting is supported in quotes; raw HTML is not.
+			if (stripos($url, 'quo:') === 0) {
+				$raw = trim(substr($url, 4));
+				$quo = '';
+				if ($raw === '') return '';
+
+				$paras = array_filter(
+					array_map('trim', explode('{}', $raw)),
+					fn($p) => $p !== ''
+				);
+
+				if (empty($paras)) return '';
+
+				foreach ($paras as $p) {
+					$quo .= '<p>' . htmlspecialchars($p, ENT_QUOTES, 'UTF-8') . '</p>';
+				}
+
+				$foot = htmlspecialchars(trim($txt), ENT_QUOTES, 'UTF-8');
+				$footHtml = $foot !== '' ? '<footer><span aria-hidden="true">&#45; </span>' . $foot . '</footer>' : '';
+
+				return '<blockquote>' . $quo . $footHtml . '</blockquote>';
+			}
 
             // Everything else → anchor (http/https/mailto/etc)
             $sUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');

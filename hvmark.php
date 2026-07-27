@@ -144,7 +144,7 @@ function hvmark(string $line): string {
             if (stripos($url, 'ytb:') === 0) {
                 $id = preg_replace('/[^A-Za-z0-9_\-]/', '', substr($url, 4));
                 if ($id === '') return '';
-                $cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8');
+                $cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
                 $iframe = '<iframe src="https://www.youtube-nocookie.com/embed/' . $id .
                           '?modestbranding=1&rel=0" ' .
                           'title="YouTube video player" loading="lazy" ' .
@@ -171,10 +171,10 @@ function hvmark(string $line): string {
 				if (empty($paras)) return '';
 
 				foreach ($paras as $p) {
-					$quo .= '<p>' . htmlspecialchars($p, ENT_QUOTES, 'UTF-8') . '</p>';
+					$quo .= '<p>' . htmlspecialchars($p, ENT_QUOTES, 'UTF-8', false) . '</p>';
 				}
 
-				$foot = htmlspecialchars(trim($txt), ENT_QUOTES, 'UTF-8');
+				$foot = htmlspecialchars(trim($txt), ENT_QUOTES, 'UTF-8', false);
 				$footHtml = $foot !== '' ? '<footer><span aria-hidden="true">&#45; </span>' . $foot . '</footer>' : '';
 
 				return '<blockquote>' . $quo . $footHtml . '</blockquote>';
@@ -182,7 +182,7 @@ function hvmark(string $line): string {
 
             // Everything else → anchor (http/https/mailto/etc)
             $sUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
-            $text = htmlspecialchars($txt === '' ? $url : $txt, ENT_QUOTES, 'UTF-8');
+            $text = htmlspecialchars($txt === '' ? $url : $txt, ENT_QUOTES, 'UTF-8', false);
             // External target+rel for http(s), leave mailto: & relatives alone.
             $isHttp = preg_match('#^https?://#i', $url);
             $attrs  = $isHttp ? ' target="_blank" rel="noopener noreferrer"' : '';

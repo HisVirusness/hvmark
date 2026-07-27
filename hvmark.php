@@ -108,7 +108,7 @@ function hvmark(string $line): string {
                 }
 
                 $cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8');
-				$alt = htmlspecialchars(strip_tags(hvmark($txt)), ENT_QUOTES, 'UTF-8');
+				$alt = htmlspecialchars(strip_tags(hvmark($txt)), ENT_QUOTES, 'UTF-8', false);
 
                 $srcAttr = htmlspecialchars($src, ENT_QUOTES, 'UTF-8');
 

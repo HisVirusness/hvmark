@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.7.0 - Vanilla
+// v1.8.0 - Vanilla
 // (c) 2026 HisVirusness
 
 // Typical Application:

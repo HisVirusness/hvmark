@@ -70,6 +70,7 @@ All use the same **“anchor + fangs”** pattern as quotes: `@@anchor^fangs^`
     (e.g., `\/` will output /.)
 *   Emojis are supported in regular text, but not in subheadings.
 *   Subheadings with similar names will have duplicate IDs; the TOC generator does not add incrementing suffixes.
+*   Quotes are **text only**.
 
 ## Further Reading
 

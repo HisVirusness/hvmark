@@ -156,7 +156,8 @@ function hvmark(string $line): string {
                 return $yt_out;
             }
 			
-			// QUOTE: @@quo:First paragraph.{}Second paragraph.^Attribution^
+			// QUOTE: @@quo:First paragraph. {}Second paragraph.^Attribution^
+			// hVmark text formatting is supported in quotes; raw HTML is not.
 			if (stripos($url, 'quo:') === 0) {
 				$indent = str_repeat("\t", $GLOBALS['hv_tabcount']);
 				$raw = trim(substr($url, 4));

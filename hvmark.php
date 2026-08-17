@@ -156,9 +156,9 @@ function hvmark(string $line): string {
                 return $yt_out;
             }
 			
-			// QUOTE: @@quo:First paragraph. {}Second paragraph.^Attribution^
-			// hVmark text formatting is supported in quotes; raw HTML is not.
+			// QUOTE: @@quo:First paragraph.{}Second paragraph.^Attribution^
 			if (stripos($url, 'quo:') === 0) {
+				$indent = str_repeat("\t", $GLOBALS['hv_tabcount']);
 				$raw = trim(substr($url, 4));
 				$quo = '';
 				if ($raw === '') return '';
@@ -171,13 +171,13 @@ function hvmark(string $line): string {
 				if (empty($paras)) return '';
 
 				foreach ($paras as $p) {
-					$quo .= '<p>' . htmlspecialchars($p, ENT_QUOTES, 'UTF-8', false) . '</p>';
+					$quo .= $indent . "\t<p>" . htmlspecialchars($p, ENT_QUOTES, 'UTF-8', false) . "</p>\n";
 				}
 
 				$foot = htmlspecialchars(trim($txt), ENT_QUOTES, 'UTF-8', false);
-				$footHtml = $foot !== '' ? '<footer><span aria-hidden="true">&#45; </span>' . $foot . '</footer>' : '';
+				$footHtml = $foot !== '' ? $indent . "\t" . '<footer><span aria-hidden="true">&#45; </span>' . $foot . '</footer>' . "\n" : '';
 
-				return '<blockquote>' . $quo . $footHtml . '</blockquote>';
+				return '<blockquote>' . "\n" . $quo . $footHtml . $indent . '</blockquote>';
 			}
 
             // Everything else → anchor (http/https/mailto/etc)

@@ -49,6 +49,24 @@ function hvmark(string $line): string {
         },
         $trim
     );
+
+	// URL Hatch: escape URLs entirely (mostly to protect against markup characters)
+    $url_protocols = [
+    	'/\bhttps?:\/\/[^\s<>]+/iu',
+    	'/\bs?ftp:\/\/[^\s<>]+/iu',
+    	'/\bgemini:\/\/[^\s<>]+/iu',
+    	'/\bgopher:\/\/[^\s<>]+/iu'
+    	];
+	$hv_url_store = [];
+	$trim = preg_replace_callback(
+	    $url_protocols,
+	    function ($m) use (&$hv_url_store) {
+	        $key = '__HVURL' . count($hv_url_store) . '__';
+	        $hv_url_store[$key] = htmlspecialchars($m[0], ENT_QUOTES, 'UTF-8');
+	        return $key;
+	    },
+	    $trim
+	);
     
     if (preg_match('/<[^>]+>/', $trim)) {
         if (!empty($hv_code_store)) {
@@ -274,10 +292,16 @@ function hvmark(string $line): string {
         '<u>$1</u>',
         $trim
     );
+	
+	// Restore escaped URLs
+	if (!empty($hv_url_store)) {
+	    $trim = strtr($trim, $hv_url_store);
+	}
     // Inline Code: `code`
     if (!empty($hv_code_store)) {
         $trim = strtr($trim, $hv_code_store);
     }
+	
     return $trim;
 }
 

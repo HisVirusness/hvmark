@@ -194,17 +194,17 @@ function hvmark(string $line): string {
 
 	// URL Hatch: escape URLs entirely (mostly to protect against markup characters)
     $url_proto_regex = [
-    	'/https?:\/\/[^\s<>"\']+/iu',
-    	'/\bs?ftp:\/\/[^\s<>"\']+/iu',
-    	'/\bgemini:\/\/[^\s<>"\']+/iu',
-    	'/\bgopher:\/\/[^\s<>"\']+/iu'
-    	];
+    	'/<[^>]*>(*SKIP)(*F)|https?:\/\/[^\s<>"\']+/iu',
+    	'/<[^>]*>(*SKIP)(*F)|\bs?ftp:\/\/[^\s<>"\']+/iu',
+    	'/<[^>]*>(*SKIP)(*F)|\bgemini:\/\/[^\s<>"\']+/iu',
+    	'/<[^>]*>(*SKIP)(*F)|\bgopher:\/\/[^\s<>"\']+/iu'
+    ];
 	$hv_url_store = [];
 	$trim = preg_replace_callback(
 	    $url_proto_regex,
 	    function ($m) use (&$hv_url_store) {
 	        $key = '__HVURL' . count($hv_url_store) . '__';
-	        $hv_url_store[$key] = htmlspecialchars($m[0], ENT_QUOTES, 'UTF-8');
+	        $hv_url_store[$key] = htmlspecialchars($m[0], ENT_QUOTES, 'UTF-8', false);
 	        return $key;
 	    },
 	    $trim

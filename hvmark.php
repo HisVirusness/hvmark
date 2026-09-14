@@ -195,9 +195,9 @@ function hvmark(string $line): string {
 	// URL Hatch: escape URLs entirely (mostly to protect against markup characters)
     $url_proto_regex = [
     	'/<[^>]*>(*SKIP)(*F)|https?:\/\/[^\s<>"\']+/iu',
-    	'/<[^>]*>(*SKIP)(*F)|\bs?ftp:\/\/[^\s<>"\']+/iu',
-    	'/<[^>]*>(*SKIP)(*F)|\bgemini:\/\/[^\s<>"\']+/iu',
-    	'/<[^>]*>(*SKIP)(*F)|\bgopher:\/\/[^\s<>"\']+/iu'
+    	'/<[^>]*>(*SKIP)(*F)|s?ftp:\/\/[^\s<>"\']+/iu',
+    	'/<[^>]*>(*SKIP)(*F)|gemini:\/\/[^\s<>"\']+/iu',
+    	'/<[^>]*>(*SKIP)(*F)|gopher:\/\/[^\s<>"\']+/iu'
     ];
 	$hv_url_store = [];
 	$trim = preg_replace_callback(

@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.8.1 - Vanilla
+// v1.8.3 - Vanilla
 // (c) 2026 HisVirusness
 
 // Typical Application:
@@ -10,6 +10,9 @@
 
 // Enable/Disable Table of Contents generation.
 $hv_toc_enabled = true;
+
+// Table of Contents custom bullet
+$hv_toc_bullet = ">>";
 
 // hVmark Subheading <h#>
 // Designate the subheading; default 2.
@@ -371,6 +374,7 @@ function hvmark_gentoc(&$html, array $opts = []) {
     global $hv_subhead;
     global $hv_tabcount;
     global $hv_toc_enabled;
+	global $hv_toc_bullet;
     global $hv_break;
     global $hv_break_toc;
 
@@ -380,6 +384,9 @@ function hvmark_gentoc(&$html, array $opts = []) {
         $navClass    = $opts['class']       ?? 'toc';
         $ariaLabel   = $opts['label']       ?? 'On this page';
         $INDENT_UNIT = $opts['indent']      ?? "\t";
+		$bullet		 = $opts['bullet']		?? $hv_toc_bullet;
+        
+        $cb = $bullet ? "<li><span aria-hidden=\"true\">{$bullet} </span>" : "";
 
         $base = is_numeric($hv_tabcount) ? (int)$hv_tabcount : 0;
         $I = function(int $delta = 0) use ($base, $INDENT_UNIT) {
@@ -415,7 +422,7 @@ function hvmark_gentoc(&$html, array $opts = []) {
         foreach ($items as $it) {
             $bracket = $it['label'];
             $bracket = substr($bracket, 3);
-            $toc .= $I(1) . '<li><span aria-hidden="true">:: </span><a href="#'.htmlspecialchars($it['id'], ENT_QUOTES).'">'
+            $toc .= $I(1) . $cb . '<a href="#'.htmlspecialchars($it['id'], ENT_QUOTES).'">'
             . $bracket
             . '</a></li>' . "\n";
         }

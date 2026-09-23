@@ -386,7 +386,7 @@ function hvmark_gentoc(&$html, array $opts = []) {
         $INDENT_UNIT = $opts['indent']      ?? "\t";
 		$bullet		 = $opts['bullet']		?? $hv_toc_bullet;
         
-        $cb = $bullet ? "<li><span aria-hidden=\"true\">{$bullet} </span>" : "";
+        $cb = $bullet ? "<span aria-hidden=\"true\">{$bullet} </span>" : "";
 
         $base = is_numeric($hv_tabcount) ? (int)$hv_tabcount : 0;
         $I = function(int $delta = 0) use ($base, $INDENT_UNIT) {
@@ -422,7 +422,7 @@ function hvmark_gentoc(&$html, array $opts = []) {
         foreach ($items as $it) {
             $bracket = $it['label'];
             $bracket = substr($bracket, 3);
-            $toc .= $I(1) . $cb . '<a href="#'.htmlspecialchars($it['id'], ENT_QUOTES).'">'
+            $toc .= $I(1) . '<li>' . $cb . '<a href="#'.htmlspecialchars($it['id'], ENT_QUOTES).'">'
             . $bracket
             . '</a></li>' . "\n";
         }

@@ -40,9 +40,12 @@ Alternate: `%text%`
 *   **Horizontal rule**: --- → `<hr>`  
     **Three or more** -, *, or _ characters on their own line will output a horizontal rule.  
     Output styling depends on configuration.
-*   **Subheading**: `*// Subheading Text*`
-*   **Subheading output**: `<h# id="subheading-text">// Subheading Text</h#>`  
+*   **Subheading Lvl 1**: `*// Subheading Text*`
+*   **Subheading Lvl 1 output**: `<h2 id="subheading-text">// Subheading Text</h2>`  
     Actual heading level is based on config.
+*   **Subheading Lvl 2**: `*|| Subsubheading Text*`
+*   **Subheading Lvl 2 output**: `<h3 id="subsubheading-text">|| Subsubheading Text</h3>`  
+    Actual heading level is based on what Lvl 1 is.
 *   **Optional TOC**: If two or more subheadings are found, a table of contents will be generated.  
     The TOC is automatically placed under the main heading (`<h1>`) of the page, at the top of the page if a main heading isn't present, or at the location of `<!--HV_TOC-->`.
 

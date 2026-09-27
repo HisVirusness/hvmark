@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.8.3 - Vanilla
+// v1.8.4 - Vanilla
 // (c) 2026 HisVirusness
 
 // Typical Application:
@@ -218,9 +218,8 @@ function hvmark(string $line): string {
 
     // *// Heading text*: <h# id="heading-text">// Heading text</h#>
     // Remember when I said "opinionated"? Exhibit A:
-    $headings = [];
     $trim = preg_replace_callback(
-        '~(?m)^(?!.*<)(?<!\\\\)\*//\s*(.+?)\*(?:\s*)$~u',
+        '~(?m)^(?!.*<)(?<!\\\\)\*(?:\/\/|\|\|)\s*(.+?)\*(?:\s*)$~u',
         function ($m) {
             global $hv_tabcount;
             global $hv_subhead;
@@ -228,6 +227,11 @@ function hvmark(string $line): string {
             global $hv_break;
 
             $text = $m[1];
+
+            $low_lvl = (strpos($m[0], '*||') === 0);
+            $head_pat = $low_lvl ? '||' : '//';
+
+            $lvl = $low_lvl ? ($hv_subhead + 1) : $hv_subhead;
 
             // slugify them IDs!
             $slug = function_exists('mb_strtolower') ? mb_strtolower($text, 'UTF-8') : strtolower($text);
@@ -247,7 +251,7 @@ function hvmark(string $line): string {
                 $sh_prefix = "";
             }
 
-            return $sh_prefix.'<h'.$hv_subhead.' id="'.$slug.'"><span aria-hidden="true">// </span>'.$safe.'</h'.$hv_subhead.'>';
+            return $sh_prefix.'<h'.$lvl.' id="'.$slug.'"><span aria-hidden="true">' .$head_pat. ' </span>'.$safe.'</h'.$lvl.'>';
         },
         $trim
     );

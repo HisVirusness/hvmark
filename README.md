@@ -46,7 +46,7 @@ Alternate: `%text%`
 *   **Subheading Lvl 2**: `*|| Subsubheading Text*`
 *   **Subheading Lvl 2 output**: `<h3 id="subsubheading-text">|| Subsubheading Text</h3>`  
     Actual heading level is based on what Lvl 1 is.
-*   **Optional TOC**: If two or more subheadings are found, a table of contents will be generated.  
+*   **Optional TOC**: If two or more high-level subheadings are found, a table of contents will be generated.  
     The TOC is automatically placed under the main heading (`<h1>`) of the page, at the top of the page if a main heading isn't present, or at the location of `<!--HV_TOC-->`.
 
 ### Links, Images, YouTube

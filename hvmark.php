@@ -11,14 +11,15 @@
 // Enable/Disable Table of Contents generation.
 $hv_toc_enabled = true;
 
-// Table of Contents custom bullet
+// Table of Contents custom bullet.
 $hv_toc_bullet = ">>";
 
 // hVmark Subheading <h#>
 // Designate the subheading; default 2.
 $hv_subhead = 2;
 
-// TOC/Subheading Section Break
+// Horizonal Rule Output
+// Also used for TOC/Subheading section break.
 // Section break HTML output; default <hr>.
 $hv_break = "<hr>";
 

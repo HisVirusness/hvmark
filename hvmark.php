@@ -29,7 +29,7 @@ $hv_break = "<hr>";
 $hv_break_toc = 0;
 
 // Subheading Break Toggle
-// Enable/Disable break above subheading.
+// Enable/Disable break above high-level subheading.
 $hv_break_sh = true;
 
 // House Rules on Output HTML Tabs

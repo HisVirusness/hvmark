@@ -244,7 +244,7 @@ function hvmark(string $line): string {
             // safety first
             $safe = htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
-            if ($hv_break_sh) {
+            if ($hv_break_sh && !$low_lvl) {
                 $indent = str_repeat("\t", $hv_tabcount);
                 $sh_prefix = $hv_break . "\n" . $indent;
             } else {

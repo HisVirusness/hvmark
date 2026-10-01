@@ -54,6 +54,8 @@ function hvmark(string $line): string {
 		$trim
 	);
 
+	$trim = str_replace(['\<', '\>'], ['&lt;', '&gt;'], $trim);
+
 	if (preg_match('/<[^>]+>/', $trim)) {
 		if (!empty($hv_code_store)) {
 			$trim = strtr($trim, $hv_code_store);
@@ -62,8 +64,8 @@ function hvmark(string $line): string {
 	}
 
 	$trim = str_replace(
-		['\*','\%','\_','\-','\+','\@','\^','\[]','\<','\>','``','\&','\/'],
-		['&#42;','&#37;','&#95;','&#45;', '&#43;','&#64;','&#94;','&#91;&#93;','&lt;','&gt;','&grave;','&amp;','&sol;'],
+		['\*','\%','\_','\-','\+','\@','\^','\[]','``','\&','\/'],
+		['&#42;','&#37;','&#95;','&#45;', '&#43;','&#64;','&#94;','&#91;&#93;','&#96;','&amp;','&#47;'],
 		$trim
 	);
 
@@ -268,6 +270,12 @@ function hvmark(string $line): string {
 	$trim = preg_replace(
 		'/<[^>]*>(*SKIP)(*F)|(?<!\w)&(?!#?\w+;)([^&]+)&(?!\w)/u',
 		'<center>$1</center>',
+		$trim
+	);
+	// Escape remaining ampersands after centered text transformation.
+	$trim = preg_replace(
+		'/<[^>]*>(*SKIP)(*F)|&(?!#?\w+;)/u',
+		'&amp;',
 		$trim
 	);
 

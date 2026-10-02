@@ -56,8 +56,8 @@ All use the same **“anchor + fangs”** pattern as quotes: `@@anchor^fangs^`
 *   **Links**: `@@https://example.com/^Link text^`  
     (leave fangs empty to use the URL as text, e.g. `@@https://example.com/^^`)
 *   **Images**: `@@img:/path/file.jpg^Caption^` (85% width by default; caption optional)  
-    Full: `@@img:/path/file.jpg[50px|25% left|right|center|blank]^Caption^`
-*   **YouTube**: `@@ytb:VIDEOID^Caption^` (caption optional)
+    Full: `@@img:/path/file.jpg[(50px|25%) (left|right|center|blank)]^Alt Text.|+|Caption Text.^`
+*   **YouTube**: `@@ytb:VIDEOID^Title|+|Caption Text.^` (caption optional)
 
 ### Lists
 

@@ -156,13 +156,14 @@ function hvmark(string $line): string {
 			if (stripos($url, 'ytb:') === 0) {
 				$id = preg_replace('/[^A-Za-z0-9_\-]/', '', substr($url, 4));
 				if ($id === '') return '';
+				$def_alt = 'YouTube Video';
 				if (str_contains($txt, '|+|')) {
 					$cpt = explode('|+|', $txt);
 					$cap = htmlspecialchars($cpt[1], ENT_QUOTES, 'UTF-8', false);
-					$alt = $cpt[0] ? htmlspecialchars($cpt[0], ENT_QUOTES, 'UTF-8', false) : 'YouTube Video';
+					$alt = $cpt[0] ? htmlspecialchars($cpt[0], ENT_QUOTES, 'UTF-8', false) : $def_alt;
 				} else {
 					$cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
-					$alt = 'YouTube Video';
+					$alt = $def_alt;
 				}
 				$iframe = '<iframe src="https://www.youtube-nocookie.com/embed/' . $id .
 						'?modestbranding=1&rel=0" ' .

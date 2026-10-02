@@ -159,10 +159,10 @@ function hvmark(string $line): string {
 				if (str_contains($txt, '|+|')) {
 					$cpt = explode('|+|', $txt);
 					$cap = htmlspecialchars($cpt[1], ENT_QUOTES, 'UTF-8', false);
-					$alt = htmlspecialchars($cpt[0], ENT_QUOTES, 'UTF-8', false);
+					$alt = $cpt[0] ? htmlspecialchars($cpt[0], ENT_QUOTES, 'UTF-8', false) : 'YouTube Video';
 				} else {
 					$cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
-					$alt = 'YouTube video player';
+					$alt = 'YouTube Video';
 				}
 				$iframe = '<iframe src="https://www.youtube-nocookie.com/embed/' . $id .
 						'?modestbranding=1&rel=0" ' .

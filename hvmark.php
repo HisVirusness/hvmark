@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.8.4 - Vanilla
+// v1.8.5 - Vanilla
 // (c) 2026 HisVirusness
 
 // Typical Application:
@@ -113,8 +113,14 @@ function hvmark(string $line): string {
 					}
 				}
 
-				$cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
-				$alt = htmlspecialchars(strip_tags(hvmark($txt)), ENT_QUOTES, 'UTF-8', false);
+				if (str_contains($txt, '|+|')) {
+					$cpt = explode('|+|', $txt);
+					$cap = htmlspecialchars($cpt[1], ENT_QUOTES, 'UTF-8', false);
+					$alt = htmlspecialchars(strip_tags(hvmark($cpt[0])), ENT_QUOTES, 'UTF-8', false);
+				} else {
+					$cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
+					$alt = htmlspecialchars(strip_tags(hvmark($txt)), ENT_QUOTES, 'UTF-8', false);
+				}
 
 				$srcAttr = htmlspecialchars($src, ENT_QUOTES, 'UTF-8');
 
@@ -150,10 +156,17 @@ function hvmark(string $line): string {
 			if (stripos($url, 'ytb:') === 0) {
 				$id = preg_replace('/[^A-Za-z0-9_\-]/', '', substr($url, 4));
 				if ($id === '') return '';
-				$cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
+				if (str_contains($txt, '|+|')) {
+					$cpt = explode('|+|', $txt);
+					$cap = htmlspecialchars($cpt[1], ENT_QUOTES, 'UTF-8', false);
+					$alt = htmlspecialchars($cpt[0], ENT_QUOTES, 'UTF-8', false);
+				} else {
+					$cap = htmlspecialchars($txt, ENT_QUOTES, 'UTF-8', false);
+					$alt = 'YouTube video player';
+				}
 				$iframe = '<iframe src="https://www.youtube-nocookie.com/embed/' . $id .
 						'?modestbranding=1&rel=0" ' .
-						'title="YouTube video player" loading="lazy" ' .
+						'title="' . $alt . '" loading="lazy" ' .
 						'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' .
 						'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
 				$full = '<figure class="yt-container" style="text-align:center;">' . $iframe . '<center><figcaption>' . $cap . '</figcaption></center></figure>';

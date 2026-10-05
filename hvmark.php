@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.8.5 - Vanilla
+// v1.8.6 - Vanilla
 // (c) 2026 HisVirusness
 
 // Typical Application:
@@ -17,6 +17,11 @@ $hv_toc_bullet = ">>";
 // hVmark Subheading <h#>
 // Designate the subheading; default 2.
 $hv_subhead = 2;
+
+// Show Line-Comment Markers In Subheadings
+// Visibly display '//' and '||'; default true
+// Note: Will still be invisible to screen readers for accessibility.
+$hv_subhead_symbols = true;
 
 // Horizonal Rule Output
 // Also used for TOC/Subheading section break.
@@ -234,12 +239,14 @@ function hvmark(string $line): string {
 	$trim = str_replace('[]', '<br>', $trim);
 
 	// *// Heading text*: <h# id="heading-text">// Heading text</h#>
+	// This handles both subheading levels.
 	// Remember when I said "opinionated"? Exhibit A:
 	$trim = preg_replace_callback(
 		'~(?m)^(?!.*<)(?<!\\\\)\*(?:\/\/|\|\|)\s*(.+?)\*(?:\s*)$~u',
 		function ($m) {
 			global $hv_tabcount;
 			global $hv_subhead;
+			global $hv_subhead_symbols;
 			global $hv_break_sh;
 			global $hv_break;
 
@@ -247,6 +254,7 @@ function hvmark(string $line): string {
 
 			$low_lvl = (strpos($m[0], '*||') === 0);
 			$head_pat = $low_lvl ? '||' : '//';
+			$head_out = $hv_subhead_symbols ? '<span aria-hidden="true">' .$head_pat. ' </span>' : '';
 
 			$lvl = $low_lvl ? ($hv_subhead + 1) : $hv_subhead;
 
@@ -268,7 +276,7 @@ function hvmark(string $line): string {
 				$sh_prefix = "";
 			}
 
-			return $sh_prefix.'<h'.$lvl.' id="'.$slug.'"><span aria-hidden="true">' .$head_pat. ' </span>'.$safe.'</h'.$lvl.'>';
+			return $sh_prefix.'<h'.$lvl.' id="'.$slug.'">' . $head_out . $safe . '</h'.$lvl.'>';
 		},
 		$trim
 	);

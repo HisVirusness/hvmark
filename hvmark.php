@@ -1,6 +1,6 @@
 <?php
 // hVmark Reference Model
-// v1.8.6 - Vanilla
+// v1.8.7 - Vanilla
 // (c) 2026 HisVirusness
 
 // Typical Application:
@@ -239,10 +239,9 @@ function hvmark(string $line): string {
 	$trim = str_replace('[]', '<br>', $trim);
 
 	// *// Heading text*: <h# id="heading-text">// Heading text</h#>
-	// This handles both subheading levels.
 	// Remember when I said "opinionated"? Exhibit A:
 	$trim = preg_replace_callback(
-		'~(?m)^(?!.*<)(?<!\\\\)\*(?:\/\/|\|\|)\s*(.+?)\*(?:\s*)$~u',
+		'~(?m)^(?!.*<)(?<!\\\\)\*(?:#|\/\/|\|\|)\s*(.+?)\*(?:\s*)$~u',
 		function ($m) {
 			global $hv_tabcount;
 			global $hv_subhead;
@@ -252,11 +251,19 @@ function hvmark(string $line): string {
 
 			$text = $m[1];
 
+			// Main Heading, because we're here, so why not?
+			$high_lvl = (strpos($m[0], '*#') === 0);
 			$low_lvl = (strpos($m[0], '*||') === 0);
-			$head_pat = $low_lvl ? '||' : '//';
-			$head_out = $hv_subhead_symbols ? '<span aria-hidden="true">' .$head_pat. ' </span>' : '';
 
-			$lvl = $low_lvl ? ($hv_subhead + 1) : $hv_subhead;
+			if ($high_lvl) {
+				$head_pat = '#';
+				$lvl = max(1, $hv_subhead - 1);
+			} else {
+				$head_pat = $low_lvl ? '||' : '//';
+				$lvl = $low_lvl ? (min(6, $hv_subhead + 1)) : $hv_subhead;
+			}
+
+			$head_out = $hv_subhead_symbols ? '<span aria-hidden="true">' .$head_pat. ' </span>' : '';
 
 			// slugify them IDs!
 			$slug = function_exists('mb_strtolower') ? mb_strtolower($text, 'UTF-8') : strtolower($text);
@@ -265,18 +272,19 @@ function hvmark(string $line): string {
 			$slug = preg_replace('/-+/', '-', $slug);         // collapse repeats
 			$slug = trim($slug, '-');                         // trim edges
 			if ($slug === '') $slug = 'section';
+			$slug_out = $high_lvl ? '' : ' id="'.$slug.'"' ;
 
 			// safety first
 			$safe = htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
-			if ($hv_break_sh && !$low_lvl) {
+			if ($hv_break_sh && !$low_lvl && !$high_lvl) {
 				$indent = str_repeat("\t", $hv_tabcount);
 				$sh_prefix = $hv_break . "\n" . $indent;
 			} else {
 				$sh_prefix = "";
 			}
 
-			return $sh_prefix.'<h'.$lvl.' id="'.$slug.'">' . $head_out . $safe . '</h'.$lvl.'>';
+			return $sh_prefix.'<h'.$lvl.$slug_out.'>' . $head_out . $safe . '</h'.$lvl.'>';
 		},
 		$trim
 	);
@@ -407,6 +415,7 @@ function hvmark_web(array $lines): string {
 
 function hvmark_gentoc(&$html, array $opts = []) {
 	global $hv_subhead;
+	global $hv_subhead_symbols;
 	global $hv_tabcount;
 	global $hv_toc_enabled;
 	global $hv_toc_bullet;
@@ -456,7 +465,7 @@ function hvmark_gentoc(&$html, array $opts = []) {
 		$toc .= $I(0) . '<ul style="list-style-type: none;">' . "\n";
 		foreach ($items as $it) {
 			$bracket = $it['label'];
-			$bracket = substr($bracket, 3);
+			if ($hv_subhead_symbols) $bracket = substr($bracket, 3);
 			$toc .= $I(1) . '<li>' . $cb . '<a href="#'.htmlspecialchars($it['id'], ENT_QUOTES).'">'
 			. $bracket
 			. '</a></li>' . "\n";

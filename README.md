@@ -82,6 +82,9 @@ All use the same **“anchor + fangs”** pattern as quotes: `@@anchor^fangs^`
 *   Subheadings with similar names will have duplicate IDs; the TOC generator does not add incrementing suffixes.
 *   Quotes are **text only**.
 
+### Requirements
+- PHP 8.0 or newer.  Developed and tested on PHP 8.3, 8.4 & 8.5.
+
 ## Further Reading
 
 *  [hVmark in Production](https://hisvirusness.com/man-page#hvmark)
